@@ -10,7 +10,7 @@ class Package
 
     public Package(int number, double weight)
     {
-        this.number = number;
+        this.number = number ;
         this.weight = weight;
         this.status = "Створено";
         count++;
