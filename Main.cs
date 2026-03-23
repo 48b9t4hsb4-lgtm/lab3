@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using System.Text;
 
 class Program
@@ -24,5 +26,25 @@ class Program
         Console.WriteLine($"чи доставлена посилка 2: {p2.IsDelivered()}");
 
         Console.WriteLine("Кількість посилок: " + Package.GetPackageCount());
+
+        string writePath = (@"C:\Users\Asus\source\repos\lab4\JSON\write.json");
+        string readPath = (@"C:\Users\Asus\source\repos\lab4\JSON\read.json");
+
+        p2.SaveToJson(writePath);
+
+        // зчитуємо дані з файлу та створюємо новий об'єкт
+                Package loadedPackage = Package.LoadFromJson(readPath);
+
+        if (loadedPackage != null)
+        {
+            Console.WriteLine("\nОбробка зчитаного файлу (Завдання 1)");
+            Console.WriteLine("Початковий стан для зчитаної посилки:");
+            Console.WriteLine(loadedPackage);
+
+            Console.WriteLine($"Чи доставлена посилка: {loadedPackage.IsDelivered()}");
+
+            Console.WriteLine($"Статус після зчитування файлу: {loadedPackage}");
+        }
+
     }
 }
